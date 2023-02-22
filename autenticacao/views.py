@@ -52,6 +52,7 @@ def logar(request):
         auth.login(request, usuario)
         return redirect('/plataforma')
 
+
 def sair (request):
     if request.method == "GET":
         auth.logout(request)
