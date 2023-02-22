@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.contrib.messages import constants
+
 
 def cadastro(request):
     if request.method == "GET":
+        if request.user.is_authenticated:
+            return redirect('/')
         return render(request, 'cadastro.html')
     elif request.method == "POST":
         username = request.POST.get('username')
@@ -32,6 +35,24 @@ def cadastro(request):
         return redirect('/auth/cadastro')
 
 
-def logar(request):    
+def logar(request):
     if request.method == "GET":
-        return render(request, 'login.html')
+        if request.user.is_authenticated:
+            return redirect('/')
+        return render(request, 'logar.html')
+    elif request.method == "POST":
+        username = request.POST.get('username')
+        senha = request.POST.get('password')
+        usuario = auth.authenticate(username=username, password=senha)
+
+    if not usuario:
+        messages.add_message(request, constants.ERROR, 'Username ou senha inválidos')
+        return redirect('/auth/logar')
+    else:
+        auth.login(request, usuario)
+        return redirect('/plataforma')
+
+def sair (request):
+    if request.method == "GET":
+        auth.logout(request)
+        return redirect('/auth/logar')
