@@ -50,7 +50,7 @@ def logar(request):
         return redirect('/auth/logar')
     else:
         auth.login(request, usuario)
-        return redirect('/plataforma')
+        return redirect('/jobs/perfil/')
 
 
 def sair (request):

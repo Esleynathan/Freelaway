@@ -49,15 +49,32 @@
                 <th scope="col">Status</th>
                 </tr>
             </thead>
+        {% for job in jobs %}    
             <tbody>
                 <tr>
-                <th scope="row"><img width="100px" src="/media/referencias/AULA_01_1.png"></th>
+                <th scope="row"><img width="100px" src="{{job.referencias.all.0}}"></th>
+
                 <td>{{job.titulo}} </td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>x</td>
+
+                <td>{% if job.categoria == 'D'%}
+                    Design
+                    {% elif job.categoria == 'EV'%}
+                    Edição de vídeo
+                    {% endif %}
+                </td>
+                <td>{{job.descricao}}</td>
+
+                <td>{% if job.status == 'AA'%}
+                    <span class="badge badge-info">Aguardando aprovação</span>
+                    {% elif job.status == 'C' %}
+                    <span class="badge badge-primary">Em criação</span>
+                    {% else %}
+                    <span class="badge badge-success">Finalizado</span>
+                    {% endif %}
+                </td>
                 </tr>
             </tbody>
+        {% endfor %}
         </table>
     </div>
 {% endblock %}
