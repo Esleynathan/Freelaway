@@ -5,28 +5,28 @@
 {% endblock %}
 {% block 'body' %}
 <div class="box">
-<form action="{% url 'logar' %}" method="POST">{% csrf_token %}
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert {{message.tags}}">
-        {{message}}
-        </div>
-    {% endfor %}
-{% endif %}
+    <form action="{% url 'logar' %}" method="POST">{% csrf_token %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{message.tags}}">
+            {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
 
-<h2 class="titulo font-degrade borda-bottom-degrade">LOGAR</h2>
-<br>
-<span class="span-descricao">Nome de usuário:</span>
-<input type="text" class="form-control input-cadastro" name="username">
-<br>
-<span class="span-descricao">Senha:</span>
-<input type="password" class="form-control input-cadastro" name="password">
-<br>
-<a href="{% url 'password_reset' %}">Esqueci minha senha</a>
-<br>
-<br>
-<input type="submit" value="LOGAR" class="btn btn-success btn-lg">
-<a href="{% url 'cadastro' %}" class="btn btn-primary btn-lg">CADASTRO</a>
-</form>
+    <h2 class="titulo font-degrade borda-bottom-degrade">LOGAR</h2>
+    <br>
+    <span class="span-descricao">Nome de usuário:</span>
+    <input type="text" class="form-control input-cadastro" name="username">
+    <br>
+    <span class="span-descricao">Senha:</span>
+    <input type="password" class="form-control input-cadastro" name="password">
+    <br>
+    <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
+    <br>
+    <br>
+    <input type="submit" value="LOGAR" class="btn btn-success btn-lg">
+    <a href="{% url 'cadastro' %}" class="btn btn-primary btn-lg">CADASTRO</a>
+    </form>
 </div>
 {% endblock %}
