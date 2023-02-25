@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.messages import constants
 from django.contrib.auth.decorators import login_required
+from .forms import Jobs as Jobsmodels
 
 @login_required(login_url='/auth/logar')
 def encontrar_jobs(request):
@@ -97,3 +98,47 @@ def enviar_projeto(request):
     job.status = 'AA'
     job.save()    
     return redirect('/jobs/perfil')
+
+@login_required(login_url='/auth/logar')  
+def criar_job(request):
+    form = Jobsmodels()
+    return render(request, 'criar_job.html', {'form': form})
+   
+       
+
+# titulo = request.POST.get ('titulo')
+#         descricao = request.POST.get ('descricao')
+#         categoria = request.POST.get ('categoria')
+#         prazo_entrega = request.POST.get ('prazo_entrega')
+#         preco = request.POST.get ('preco')
+#         referencias = request.POST.get ('referencia')
+    #     profissional = request.POST.get ('username')
+    #     reservado = request.POST.get ('username')
+    #     status = request.POST.get ('username')
+    #     arquivo_final = request.POST.get ('username')
+
+    #     username = request.POST.get ('username')
+    #     email = request.POST.get ('email')
+    #     primeiro_nome = request.POST.get ('primeiro_nome')
+    #     ultimo_nome = request.POST.get ('ultimo_nome')
+
+    #     usuario = User.objects.filter(username=username).exclude(id=request.user.id)
+
+    #     if usuario.exists():
+    #         messages.add_message(request, constants.ERROR, 'Já existe um usuário com esse Username')
+    #         return redirect('/jobs/perfil')
+        
+    #     usuario = User.objects.filter(email=email).exclude(id=request.user.id)
+
+    #     if usuario.exists():
+    #         messages.add_message(request, constants.ERROR, 'Já existe um usuário com esse E-mail')
+    #         return redirect('/jobs/perfil')
+        
+    #     request.user.username = username
+    #     request.user.email = email
+    #     request.user.first_name = primeiro_nome
+    #     request.user.last_name = ultimo_nome
+    #     request.user.save()
+    #     messages.add_message(request, constants.SUCCESS, 'Dados alterado com sucesso')
+    
+    #     return redirect('/jobs/perfil')
